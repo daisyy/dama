@@ -1,0 +1,19 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [QSA,L]
+
+<VirtualHost *:80>
+    ServerAdmin jackongc@gmail.com
+    DocumentRoot "/var/www/html/public"
+    ServerName dama.daisyy.net
+    ServerAlias dama.daisyy.net
+
+    #ErrorLog "logs/mysite.com-error.log"
+    #CustomLog "logs/mysite.com-access.log" combined
+
+    <Directory "/var/www/html/public">
+        AllowOverride All
+        Order allow,deny
+        Allow from all
+    </Directory>
+</VirtualHost>
