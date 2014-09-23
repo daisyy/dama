@@ -43,7 +43,7 @@ $app->group('/api', function() use($app, $paths) {
     if (!file_exists(APP_DIR . "/src/routers/$router.php")) {
         return;
     }
-    $app->group("/$router", function() use($app, $router) {
+    $app->group("/$paths[2]", function() use($app, $router) {
         $routerClass = "src\\routers\\$router";
         new $routerClass($app);
     });
