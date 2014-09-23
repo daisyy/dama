@@ -33,13 +33,13 @@ $app->error(function(Exception $e) use($app) {
 $request = $app->request();
 $paths = explode('/', $request->getResourceUri());
 
-if (count($paths) < 3 || strtolower($paths[0]) != 'api') {
+if (count($paths) < 4 || strtolower($paths[1]) != 'api') {
     $app->getLog()->error('bad request:' . $request->getResourceUri());
     $app->status(400);
 }
 
 $app->group('/api', function() use($app, $paths) {
-    $router = ucfirst(strtolower($paths[1]));
+    $router = ucfirst(strtolower($paths[2]));
     if (!file_exists(APP_DIR . "/src/routers/$router.php")) {
         return;
     }
