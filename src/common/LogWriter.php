@@ -8,6 +8,8 @@
 namespace src\common;
 
 
+use Slim\Slim;
+
 class LogWriter {
     private $file = null;
     public function __construct() {
@@ -19,6 +21,14 @@ class LogWriter {
     }
 
     public function write($message) {
-        fwrite($this->file, json_encode($message));
+        if (!is_string($message)) {
+            $message = json_encode($message);
+        }
+        $req = Slim::getInstance()->request();
+        $path = $req->getResourceUri();
+        $userAgent = $req->getUserAgent();
+        $method = $req->getMethod();
+        $params = json_encode($req->params());
+        fwrite($this->file, "$message|$method|$path|$params|$userAgent");
     }
 } 
