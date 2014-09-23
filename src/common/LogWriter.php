@@ -18,9 +18,6 @@ class LogWriter {
     }
 
     public function write($message) {
-        if (!is_string($message)) {
-            $message = json_encode($message);
-        }
         fwrite($this->file, NOW . "|$message\n");
     }
 } 
