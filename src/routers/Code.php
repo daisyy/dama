@@ -41,7 +41,7 @@ class Code {
 
         $api = new \Dama2Api($account, $password);
         $result = $api->decode($file, 42);
-        if (!isset($result['ret']) || $result['ret'] || !isset($result['id'])) {
+        if (!isset($result['ret']) || $result['ret'] != 0 || !isset($result['id'])) {
             return $this->response(array(
                 'ok' => false,
                 'msg' => '无法打码'
@@ -71,7 +71,7 @@ class Code {
         $api = new \Dama2Api($account, $password);
         $result = $api->get_result($id);
         if (isset($result['ret'])) {
-            if ($result['ret'] != '0' && $result['ret'] == '-303') {
+            if ($result['ret'] != 0 && $result['ret'] == '-303') {
                 return $this->response(array(
                     'ok' => false,
                     'msg' => '结果未出',
@@ -79,7 +79,7 @@ class Code {
                 ));
             }
 
-            if ($result['ret'] == '0' && $result['result']) {
+            if ($result['ret'] == 0 && $result['result']) {
                 return $this->response(array(
                     'ok' => true,
                     'code' => $result['result']
