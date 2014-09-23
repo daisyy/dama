@@ -11,7 +11,7 @@ namespace src\common;
 class LogWriter {
     private $file = null;
     public function __construct() {
-        $this->file = fopen(APP_DIR . '/log/' . date('YMd') . '.log', 'a');
+        $this->file = fopen('/tmp/' . DATE . '.log', 'a');
     }
 
     public function __destruct() {
