@@ -21,6 +21,6 @@ class LogWriter {
         if (!is_string($message)) {
             $message = json_encode($message);
         }
-        fwrite($this->file, $message);
+        fwrite($this->file, NOW . "|$message\n");
     }
 } 
